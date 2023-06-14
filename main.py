@@ -21,7 +21,7 @@ def create_ecr_repository(repositoryName, imageTagMutability, scanOnPush, encryp
         tags=tags,
         imageTagMutability=imageTagMutability,
         imageScanningConfiguration={
-            'scanOnPush': scanOnPush
+            'scanOnPush': str2bool(scanOnPush)
         },
         encryptionConfiguration=encryptionConfiguration
     )
