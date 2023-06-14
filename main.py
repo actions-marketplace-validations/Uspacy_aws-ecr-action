@@ -1,6 +1,7 @@
 import boto3
 import os
 import json
+import ast
 
 tagStatus = os.getenv("tagStatus", default="any")
 countType = os.getenv("countType", default="imageCountMoreThan")
@@ -9,6 +10,19 @@ repositoryName = os.environ["repositoryName"]
 imageTagMutability = os.getenv("imageTagMutability", default="MUTABLE")
 scanOnPush = os.getenv("scanOnPush", default=True)
 tags = os.getenv("tags", default=[])
+
+
+### Try validate variables
+if tags == "":
+    tags = []
+
+if type(tags) == str:
+    tags = ast.literal_eval(tags)
+
+if type(countNumber) == str:
+    countNumber = ast.literal_eval(countNumber)
+
+
 
 client = boto3.client('ecr')
 
@@ -75,6 +89,7 @@ encryptionConfiguration = {
 }
 
 if check_repository_exist(repositoryName=repositoryName) != True:
+
     ecr = create_ecr_repository(repositoryName=repositoryName, imageTagMutability=imageTagMutability, scanOnPush=scanOnPush,
                           encryptionConfiguration=encryptionConfiguration, tags=tags)
     print("Created repository: %s" % ecr['repository']['repositoryName'])
