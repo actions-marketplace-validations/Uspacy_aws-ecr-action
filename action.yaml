@@ -1,5 +1,8 @@
 name: 'AWS ECR create repository'
 description: 'Create repository in AWS ECR if not exist and set lifecycle policy'
+branding:
+  icon: 'cloud'
+  color: 'orange'
 inputs:
   repositoryName:
     description: 'Repository name'
