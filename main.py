@@ -2,13 +2,13 @@ import boto3
 import os
 import json
 
-tagStatus = os.getenv("tagStatus", default="any")
-countType = os.getenv("countType", default="imageCountMoreThan")
-countNumber = os.getenv("countNumber", default=30)
-repositoryName = os.environ["repositoryName"]
-imageTagMutability = os.getenv("imageTagMutability", default="MUTABLE")
-scanOnPush = os.getenv("scanOnPush", default=True)
-tags = os.getenv("tags", default=[])
+tagStatus = os.getenv("INPUT_TAGSTATUS", default="any")
+countType = os.getenv("INPUT_COUNTTYPE", default="imageCountMoreThan")
+countNumber = os.getenv("INPUT_COUNTNUMBER", default=30)
+repositoryName = os.environ["INPUT_REPOSITORYNAME"]
+imageTagMutability = os.getenv("INPUT_IMAGETAGMUTABILITY", default="MUTABLE")
+scanOnPush = os.getenv("INPUT_SCANONPUSH", default=True)
+tags = os.getenv("INPUT_TAGS", default=[])
 
 client = boto3.client('ecr')
 
