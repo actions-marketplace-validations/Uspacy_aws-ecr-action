@@ -3,14 +3,14 @@ import os
 import json
 import ast
 
-tagStatus = os.getenv("tagStatus", default="any")
+tagStatus = os.getenv("tagStatus", default="tagged")
 countType = os.getenv("countType", default="imageCountMoreThan")
 countNumber = os.getenv("countNumber", default=30)
 repositoryName = os.environ["repositoryName"]
 imageTagMutability = os.getenv("imageTagMutability", default="MUTABLE")
 scanOnPush = os.getenv("scanOnPush", default=True)
 tags = os.getenv("tags", default=[])
-
+tagPrefixList = os.getenv("tagPrefixList", default="sha")
 
 ### Try validate variables
 if tags == "":
@@ -71,6 +71,7 @@ lifecyclePolicy = {
             "description": "Default lifecycle policy",
             "selection": {
                 "tagStatus": tagStatus,
+                "tagPrefixList": tagPrefixList,
                 "countType": countType,
                 "countNumber": countNumber
             },
